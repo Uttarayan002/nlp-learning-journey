@@ -6,8 +6,52 @@ In Natural Language Processing (NLP) is the process of shortening long pieces of
 2. **Abstractive Summarization**: This approach generates new sentences that capture the essence of the original text. Unlike extractive summarization, abstractive summarization can produce summaries that include paraphrased content or new expressions that are not explicitly present in the original text. This method often uses advanced NLP techniques, including deep learning models like transformers.
 
 Text summarization is used in various applications, such as news aggregation, document processing, and creating digestible content for quick consumption. It helps in efficiently managing and understanding large volumes of textual data.
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________________________________________________
+#  TextRank algorithm
+The TextRank algorithm is an unsupervised, graph-based ranking algorithm for Natural Language Processing (NLP) tasks, inspired by Google's PageRank algorithm. It is primarily used for:
 
+- Text Summarization (extractive summarization)
+- Keyword/Keyphrase Extraction
+- Textual Similarity & Information Retrieval
+
+## How TextRank Works
+TextRank constructs a graph representation of text, where:
+- Nodes represent words, phrases, or sentences.
+- Edges represent relationships (e.g., co-occurrence, semantic similarity).
+- Scores are assigned based on the importance of nodes in the graph.
+
+## Key Steps:
+1. **Text Preprocessing**
+   - Tokenization, stopword removal, stemming/lemmatization.
+   - For keyword extraction, use n-grams (e.g., "machine learning" as a single node).
+   - For summarization, split text into sentences.
+
+2. **Graph Construction**
+> For Keyword Extraction:
+  - Words/n-grams are nodes.
+   - Edges connect words that co-occur within a sliding window (e.g., window size = 2-5).
+
+> For Summarization:
+ - Sentences are nodes.
+  - Edges represent similarity (e.g., cosine similarity, overlap).
+
+3. **Scoring Nodes (PageRank Algorithm)**
+- Each node starts with an initial score (e.g., 1).
+- Scores are updated iteratively based on:
+  <img width="696" height="225" alt="Screenshot (581)" src="https://github.com/user-attachments/assets/7caa480f-631d-4339-b842-b5ba4dd8ea6e" />
+
+
+
+4. **Ranking & Extraction**
+
+- Keywords: Select top-scoring words/n-grams.
+- Summaries: Select top-scoring sentences.
+
+
+
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________
 # What is Extractive Summarization?
 It selects the most important sentences from the original text to form a summary — like highlighting only the best lines in a news article.
 
