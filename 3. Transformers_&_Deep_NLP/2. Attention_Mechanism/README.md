@@ -1,63 +1,126 @@
-## **Attention Mechanism – Roadmap**
+## **Stage 1 – Foundations**
 
-**Stage: From single-head to full Transformer block**
+**Goal:** Be fluent in the core deep learning building blocks before touching attention.
 
-**1. Why Attention? (Intuition & Motivation)**
+1. **Neural network basics**
 
-* *What problem it solves*: Capturing relationships between tokens regardless of distance.
-* *Compare*: RNN limitations, CNN limitations.
-* *Analogy*: Weighted focus on relevant words.
+   * Feedforward networks (linear layers, non-linear activation)
+   * Backpropagation and gradient descent
+   * Parameter counts and scaling
+   * **Resources:**
 
+     * *Neural Networks and Deep Learning* by Michael Nielsen (free online)
+     * 3Blue1Brown’s Neural Networks playlist
 
-**2. Single-Head Scaled Dot-Product Attention**
+2. **Sequences & embeddings**
 
-* **Inputs**: Queries (Q), Keys (K), Values (V)
-* **Math flow**:
+   * One-hot encoding → word embeddings
+   * Why embeddings are better than sparse one-hots
+   * Word2Vec, GloVe (skip details, but know the idea)
+   * **Goal:** Understand that “tokens become vectors” in NLP.
 
-  1. Similarity scores = $QK^\top$
-  2. Scale by $\sqrt{d_k}$
-  3. Softmax to get attention weights
-  4. Weighted sum with V
-* **Visual**: Heatmap of attention weights between tokens.
+3. **Sequential models before attention**
 
-**3. Multi-Head Attention (MHA)**
+   * RNN, LSTM, GRU: How they process sequences step-by-step
+   * Their limitations: long-term dependencies, vanishing gradients
+__________________________________________________________________________________________________________________________________________________________________________________________________________
 
-* **Why multiple heads**: Learn different relation patterns in parallel.
-* **Steps**:
+## **Stage 2 – Enter Attention**
 
-  1. Linear projections for each head
-  2. Run scaled dot-product attention for each head
-  3. Concatenate & project
-* **Visual**: Multiple heatmaps → stacked → merged.
+**Goal:** Understand the *problem* attention solves, then how it works mathematically.
 
+1. **Motivation for attention**
 
-**4. Types of Attention**
+   * Why RNNs fail for long sequences
+   * Intuition: “Instead of remembering everything, just look where you need to.”
 
-* **Self-Attention**: Q, K, V from same sequence.
-* **Cross-Attention**: Q from decoder, K/V from encoder.
-* **Masked Self-Attention**: Hide future tokens (decoder).
+2. **Basic attention math**
 
+   * Query, Key, Value vectors
+   * Similarity function (dot product)
+   * Softmax weighting
+   * Weighted sum output
+   * **Analogy:** “Google search inside the sequence.”
 
-**5. Implementation Tricks & Variations**
+3. **Types of attention**
 
-* Masking mechanics
-* Padding handling
-* Efficient attention (sparse, linear)
-* Head dropout
+   * Additive (Bahdanau)
+   * Multiplicative (Luong)
+   * Self-attention vs encoder-decoder attention
 
+4. **Self-attention deep dive**
 
-**6. Visualization & Interpretation**
+   * Formula:
 
-* Token-to-token heatmaps
-* Head specialization examples (syntax, coreference)
-* How attention evolves across layers
+     $$
+     \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+     $$
+   * Scaling factor $\sqrt{d_k}$
+   * Multi-head attention intuition
 
+__________________________________________________________________________________________________________________________________________________________________________________________________________
 
-**7. Integration in Transformer Block**
+## **Stage 3 – The Transformer**
 
-* MHA → Add & Norm → Feedforward → Add & Norm
-* Where attention sits in encoder & decoder
+**Goal:** See how attention is put together with other components into a full architecture.
 
-Do you want me to make that visual now?
+1. **Transformer encoder/decoder blocks**
+
+   * Multi-head attention
+   * Position-wise feed-forward networks
+   * Residual connections + LayerNorm
+   * Positional encoding
+
+2. **Encoder-decoder structure**
+
+   * Encoder = “understand input”
+   * Decoder = “generate output step-by-step”
+   * Cross-attention in the decoder
+
+3. **Training a Transformer**
+
+   * Teacher forcing
+   * Masking in attention
+   * Loss functions (cross entropy)
+
+4. **Key papers & resources**
+
+   * *Attention Is All You Need* (Vaswani et al., 2017) — read diagrams first
+   * Illustrated Transformer by Jay Alammar
+
+__________________________________________________________________________________________________________________________________________________________________________________________________________
+## **Stage 4 – Practice & Extensions**
+
+**Goal:** Implement and extend Transformers to build intuition.
+
+1. **From scratch**
+
+   * Implement scaled dot-product attention in NumPy/PyTorch
+   * Build a single-head self-attention block
+   * Add multi-heads + positional encoding
+
+2. **Full Transformer in code**
+
+   * PyTorch official tutorial: *The Annotated Transformer*
+   * Hugging Face “Transformers from scratch” course
+
+3. **Extensions & variants**
+
+   * BERT (encoder-only)
+   * GPT (decoder-only)
+   * Vision Transformer (ViT)
+   * Efficient Transformers (Linformer, Performer)
+
+4. **Experiment**
+
+   * Change number of heads, depth, embedding size
+   * Try small datasets first (character-level modeling, small translation task)
+__________________________________________________________________________________________________________________________________________________________________________________________________________
+## Suggested Timeline
+
+* **Week 1–2:** Stage 1 (Foundations)
+* **Week 3–4:** Stage 2 (Basic attention)
+* **Week 5–6:** Stage 3 (Transformer architecture)
+* **Week 7+:** Stage 4 (Implementation & exploration)
 
 
